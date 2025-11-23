@@ -41,10 +41,12 @@ st.markdown("""
     }
     
     .question {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        color: #333;
-        margin-bottom: 1.5rem;
+        color: #1a202c;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
     
     .scale-container {
@@ -55,9 +57,10 @@ st.markdown("""
     }
     
     .scale-label {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #666;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
     }
     
     .stButton>button {
@@ -135,14 +138,16 @@ def circle_scale(question_num, label):
     st.markdown(f'<div class="question">{question_num}. {label}</div>', unsafe_allow_html=True)
     
     cols = st.columns([2, 1, 1, 1, 1, 1, 1, 1, 2])
-    cols[0].markdown('<div class="scale-label">매우 동의</div>', unsafe_allow_html=True)
+    cols[0].markdown('<div class="scale-label">매우<br>동의</div>', unsafe_allow_html=True)
     
     selected = None
     for i in range(1, 8):
-        if cols[i].button("●", key=f"q{question_num}_s{i}", help=f"{i}점"):
-            selected = i
+        # 왼쪽(1)이 7점(매우 동의), 오른쪽(7)이 1점(매우 비동의)
+        actual_score = 8 - i
+        if cols[i].button("●", key=f"q{question_num}_s{i}", help=f"{actual_score}점"):
+            selected = actual_score
     
-    cols[8].markdown('<div class="scale-label">매우 비동의</div>', unsafe_allow_html=True)
+    cols[8].markdown('<div class="scale-label">매우<br>비동의</div>', unsafe_allow_html=True)
     
     return selected
 
