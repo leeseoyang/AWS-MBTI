@@ -17,28 +17,28 @@
         <!-- 메인 페이지 -->
         <div id="main-page" class="page active">
             <header>
-                <h1>🎓 건양대학교 MBTI 전공 추천</h1>
-                <p>32개 성향 문항으로 정확한 MBTI를 분석하여 28개 학과 중 최적의 전공을 추천합니다!</p>
+                <h1>🎓 건양대학교 전과 적성 진단 질문지</h1>
             </header>
             <div class="intro-section">
-                <div class="feature-cards">
-                    <div class="feature-card">
-                        <div class="icon">🧠</div>
-                        <h3>성격 분석</h3>
-                        <p>MBTI 16가지 성격 유형으로 당신을 분석합니다</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="icon">📚</div>
-                        <h3>맞춤 추천</h3>
-                        <p>성격에 맞는 최적의 학과를 추천해드립니다</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="icon">🎯</div>
-                        <h3>진로 가이드</h3>
-                        <p>각 학과의 특징과 진로 방향을 제시합니다</p>
-                    </div>
+                <div class="notice-section">
+                    <h2>📌 안내문</h2>
+                    <p>본 질문지는 건양대학교 재학생의 전과 준비를 지원하기 위해 제작되었습니다.<br>
+                    학생 개개인의 성향 및 학습 스타일을 간단히 파악하여,<br>
+                    전과가 가능한 학과 중 학생에게 적합한 전공 방향을 예비적으로 제시하는 것을 목적으로 합니다.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>아래의 내용을 확인한 후 응답해 주시기 바랍니다.</strong></p>
+                    <ol class="notice-list">
+                        <li>각 문항은 현재 본인의 모습을 기준으로 선택해 주십시오.</li>
+                        <li>응답은 가급적 첫 느낌에 가장 가까운 항목으로 선택하는 것을 권장합니다.</li>
+                        <li>질문지 결과는 전과 지원의 자격 및 선발 여부와 무관하며,<br>
+                        학생의 전공 탐색을 돕기 위한 참고용 자료로 제공됩니다.</li>
+                        <li>모든 문항에 응답할 경우, 입력된 답변을 기반으로<br>
+                        학생의 성향 분석에 따른 전공 추천 결과가 안내됩니다.</li>
+                    </ol>
+                    
+                    <p style="margin-top: 1.5rem; font-weight: 600; color: #3b82f6;">학생 여러분의 성실한 응답은 향후 전과 준비 및 전공 선택에 유의미한 도움이 될 것입니다.</p>
                 </div>
-                <button id="start-btn" class="start-button">테스트 시작하기</button>
+                <button id="start-btn" class="start-button">진단 시작하기</button>
             </div>
         </div>
 
@@ -51,9 +51,21 @@
             
             <div class="question-section">
                 <h2 id="question-title">질문을 불러오는 중...</h2>
-                <div class="options" role="radiogroup" aria-labelledby="question-title">
-                    <button class="option-btn" data-type="E" role="radio" aria-checked="false" tabindex="0">옵션 A</button>
-                    <button class="option-btn" data-type="I" role="radio" aria-checked="false" tabindex="0">옵션 B</button>
+                <p class="question-subtitle">선택을 보류하는 것이 해야할 일을 정확히 알고 있는 것 보다 중요합니다.</p>
+                <div class="scale-container">
+                    <div class="scale-options" role="radiogroup" aria-labelledby="question-title">
+                        <button class="scale-btn" data-value="1" role="radio" aria-checked="false" aria-label="매우 동의" tabindex="0"></button>
+                        <button class="scale-btn" data-value="2" role="radio" aria-checked="false" aria-label="동의" tabindex="0"></button>
+                        <button class="scale-btn" data-value="3" role="radio" aria-checked="false" aria-label="약간 동의" tabindex="0"></button>
+                        <button class="scale-btn" data-value="4" role="radio" aria-checked="false" aria-label="중립" tabindex="0"></button>
+                        <button class="scale-btn" data-value="5" role="radio" aria-checked="false" aria-label="약간 비동의" tabindex="0"></button>
+                        <button class="scale-btn" data-value="6" role="radio" aria-checked="false" aria-label="비동의" tabindex="0"></button>
+                        <button class="scale-btn" data-value="7" role="radio" aria-checked="false" aria-label="매우 비동의" tabindex="0"></button>
+                    </div>
+                    <div class="scale-labels">
+                        <span class="scale-label-left">동의</span>
+                        <span class="scale-label-right">비동의</span>
+                    </div>
                 </div>
             </div>
             

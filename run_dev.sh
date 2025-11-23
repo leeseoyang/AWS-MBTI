@@ -58,33 +58,40 @@ echo "4) 모든 서버 동시 실행"
 
 read -p "선택 (1-4): " choice
 
+
+# 퍼블릭 IP 자동 탐지
+PUBLIC_IP=$(curl -s http://checkip.amazonaws.com)
+
 case $choice in
     1)
         echo -e "${GREEN}🎯 Streamlit 기본 서버 실행...${NC}"
-        echo -e "${BLUE}🌐 브라우저에서 http://localhost:8501 접속${NC}"
-        streamlit run server/app/main.py --server.port 8501
+        echo -e "${BLUE}🌐 내부: http://localhost:8501${NC}"
+        echo -e "${BLUE}🌐 외부: http://$PUBLIC_IP:8501${NC}"
+        streamlit run server/app/main.py --server.port 8501 --server.address 0.0.0.0
         ;;
     2)
         echo -e "${GREEN}✨ Streamlit 프리미엄 서버 실행...${NC}"
-        echo -e "${BLUE}🌐 브라우저에서 http://localhost:8502 접속${NC}"
-        streamlit run server/app/mbti_premium.py --server.port 8502
+        echo -e "${BLUE}🌐 내부: http://localhost:8502${NC}"
+        echo -e "${BLUE}🌐 외부: http://$PUBLIC_IP:8502${NC}"
+        streamlit run server/app/mbti_premium.py --server.port 8502 --server.address 0.0.0.0
         ;;
     3)
         echo -e "${GREEN}📄 정적 웹서버 실행...${NC}"
-        echo -e "${BLUE}🌐 브라우저에서 http://localhost:8000 접속${NC}"
+        echo -e "${BLUE}🌐 내부: http://localhost:8000${NC}"
+        echo -e "${BLUE}🌐 외부: http://$PUBLIC_IP:8000${NC}"
         cd client
-        python -m http.server 8000
+        python -m http.server 8000 --bind 0.0.0.0
         ;;
     4)
         echo -e "${GREEN}🚀 모든 서버 동시 실행...${NC}"
-        echo -e "${BLUE}📍 Streamlit 기본: http://localhost:8501${NC}"
-        echo -e "${BLUE}📍 Streamlit 프리미엄: http://localhost:8502${NC}"
-        echo -e "${BLUE}📍 정적 웹서버: http://localhost:8000${NC}"
+        echo -e "${BLUE}📍 Streamlit 기본: http://localhost:8501 (외부: http://$PUBLIC_IP:8501)${NC}"
+        echo -e "${BLUE}📍 Streamlit 프리미엄: http://localhost:8502 (외부: http://$PUBLIC_IP:8502)${NC}"
+        echo -e "${BLUE}📍 정적 웹서버: http://localhost:8000 (외부: http://$PUBLIC_IP:8000)${NC}"
         
         # 백그라운드로 서버들 실행
-        streamlit run server/app/main.py --server.port 8501 &
-        streamlit run server/app/mbti_premium.py --server.port 8502 &
-        cd client && python -m http.server 8000 &
+        streamlit run server/app/main.py --server.port 8501 --server.address 0.0.0.0 &
+        streamlit run server/app/mbti_premium.py --server.port 8502 --server.address 0.0.0.0 &
+        cd client && python -m http.server 8000 --bind 0.0.0.0 &
         
         echo -e "${GREEN}✅ 모든 서버가 시작되었습니다!${NC}"
         echo -e "${YELLOW}⚠️  종료하려면 Ctrl+C를 누르세요${NC}"

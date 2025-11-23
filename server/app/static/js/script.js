@@ -11,44 +11,44 @@ class MBTITest {
     initializeQuestions() {
         return [
             // I/E 문항 (8개)
-            { question: "혼자서 집중하는 시간이 편하다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "깊고 진지한 대화를 선호한다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "조용한 곳에서 공부가 잘 된다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "발표보다 글로 표현하는 것이 익숙하다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "혼자서 문제를 해결하는 편이다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "대답하기 전에 한 번 생각한다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "새로운 사람을 만나는 데 시간이 필요하다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
-            { question: "개인 시간 확보가 중요하다.", type: "IE", options: ["그렇다 (I)", "아니다 (E)"] },
+            { question: "혼자서 집중하는 시간이 편하다.", type: "IE", dimension: "I" },
+            { question: "깊고 진지한 대화를 선호한다.", type: "IE", dimension: "I" },
+            { question: "조용한 곳에서 공부가 잘 된다.", type: "IE", dimension: "I" },
+            { question: "발표보다 글로 표현하는 것이 익숙하다.", type: "IE", dimension: "I" },
+            { question: "혼자서 문제를 해결하는 편이다.", type: "IE", dimension: "I" },
+            { question: "대답하기 전에 한 번 생각한다.", type: "IE", dimension: "I" },
+            { question: "새로운 사람을 만나는 데 시간이 필요하다.", type: "IE", dimension: "I" },
+            { question: "개인 시간 확보가 중요하다.", type: "IE", dimension: "I" },
             
             // S/N 문항 (8개)
-            { question: "실제 데이터와 사실 기반 정보를 선호한다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "단계별 절차를 따르는 것이 편하다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "손으로 만져보고 배우는 게 빠르다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "현재 실천 가능한 것이 중요하다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "구체적인 예시가 있어야 이해가 된다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "현실적이고 실용적인 선택을 한다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "기존 방식이 안정적이다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
-            { question: "세부 사항을 꼼꼼히 살핀다.", type: "SN", options: ["그렇다 (S)", "아니다 (N)"] },
+            { question: "실제 데이터와 사실 기반 정보를 선호한다.", type: "SN", dimension: "S" },
+            { question: "단계별 절차를 따르는 것이 편하다.", type: "SN", dimension: "S" },
+            { question: "손으로 만져보고 배우는 게 빠르다.", type: "SN", dimension: "S" },
+            { question: "현재 실천 가능한 것이 중요하다.", type: "SN", dimension: "S" },
+            { question: "구체적인 예시가 있어야 이해가 된다.", type: "SN", dimension: "S" },
+            { question: "현실적이고 실용적인 선택을 한다.", type: "SN", dimension: "S" },
+            { question: "기존 방식이 안정적이다.", type: "SN", dimension: "S" },
+            { question: "세부 사항을 꼼꼼히 살핀다.", type: "SN", dimension: "S" },
             
             // T/F 문항 (8개)
-            { question: "결정을 할 때 논리·분석이 우선이다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "데이터 중심의 판단을 선호한다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "솔직하고 직선적인 말이 좋다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "효율이 중요하다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "갈등을 논리로 해결한다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "경쟁적 환경이 동기부여된다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "문제를 해결할 때 감정 배제 가능하다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
-            { question: "결과가 중요한 편이다.", type: "TF", options: ["그렇다 (T)", "아니다 (F)"] },
+            { question: "결정을 할 때 논리·분석이 우선이다.", type: "TF", dimension: "T" },
+            { question: "데이터 중심의 판단을 선호한다.", type: "TF", dimension: "T" },
+            { question: "솔직하고 직선적인 말이 좋다.", type: "TF", dimension: "T" },
+            { question: "효율이 중요하다.", type: "TF", dimension: "T" },
+            { question: "갈등을 논리로 해결한다.", type: "TF", dimension: "T" },
+            { question: "경쟁적 환경이 동기부여된다.", type: "TF", dimension: "T" },
+            { question: "문제를 해결할 때 감정 배제 가능하다.", type: "TF", dimension: "T" },
+            { question: "결과가 중요한 편이다.", type: "TF", dimension: "T" },
             
             // J/P 문항 (8개)
-            { question: "계획을 세우고 움직인다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "마감 전에 미리 끝내는 편이다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "해야 할 일을 목록으로 정리한다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "정리정돈이 잘 되어 있어야 한다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "루틴이 중요하다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "한 번 정하면 지키려 한다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "안정성과 확실함이 중요하다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] },
-            { question: "계획적인 일정이 편하다.", type: "JP", options: ["그렇다 (J)", "아니다 (P)"] }
+            { question: "계획을 세우고 움직인다.", type: "JP", dimension: "J" },
+            { question: "마감 전에 미리 끝내는 편이다.", type: "JP", dimension: "J" },
+            { question: "해야 할 일을 목록으로 정리한다.", type: "JP", dimension: "J" },
+            { question: "정리정돈이 잘 되어 있어야 한다.", type: "JP", dimension: "J" },
+            { question: "루틴이 중요하다.", type: "JP", dimension: "J" },
+            { question: "한 번 정하면 지키려 한다.", type: "JP", dimension: "J" },
+            { question: "안정성과 확실함이 중요하다.", type: "JP", dimension: "J" },
+            { question: "계획적인 일정이 편하다.", type: "JP", dimension: "J" }
         ];
     }
 
@@ -58,7 +58,7 @@ class MBTITest {
         this.resultPage = document.getElementById('result-page');
         this.startBtn = document.getElementById('start-btn');
         this.questionTitle = document.getElementById('question-title');
-        this.optionBtns = document.querySelectorAll('.option-btn');
+        this.scaleBtns = document.querySelectorAll('.scale-btn');
         this.prevBtn = document.getElementById('prev-btn');
         this.nextBtn = document.getElementById('next-btn');
         this.progressFill = document.querySelector('.progress-fill');
@@ -74,21 +74,21 @@ class MBTITest {
         this.restartBtn.addEventListener('click', () => this.restartTest());
         this.shareBtn.addEventListener('click', () => this.shareResult());
         
-        this.optionBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => this.selectOption(e));
+        this.scaleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => this.selectScale(e));
             // 키보드 지원
             btn.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    this.selectOption(e);
+                    this.selectScale(e);
                 }
                 // 화살표 키로 옵션 간 이동
-                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                if (e.key === 'ArrowRight') {
                     e.preventDefault();
                     const nextBtn = btn.nextElementSibling;
                     if (nextBtn) nextBtn.focus();
                 }
-                if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                if (e.key === 'ArrowLeft') {
                     e.preventDefault();
                     const prevBtn = btn.previousElementSibling;
                     if (prevBtn) prevBtn.focus();
@@ -131,31 +131,17 @@ class MBTITest {
     displayQuestion() {
         const question = this.questions[this.currentQuestion];
         this.questionTitle.textContent = question.question;
-        
-        this.optionBtns[0].textContent = question.options[0];
-        this.optionBtns[0].dataset.type = question.type;
-        this.optionBtns[0].dataset.answer = question.options[0].includes('(I)') ? 'I' : 
-                                          question.options[0].includes('(S)') ? 'S' :
-                                          question.options[0].includes('(T)') ? 'T' :
-                                          question.options[0].includes('(J)') ? 'J' : 'A';
-        
-        this.optionBtns[1].textContent = question.options[1];
-        this.optionBtns[1].dataset.type = question.type;
-        this.optionBtns[1].dataset.answer = question.options[1].includes('(E)') ? 'E' : 
-                                          question.options[1].includes('(N)') ? 'N' :
-                                          question.options[1].includes('(F)') ? 'F' :
-                                          question.options[1].includes('(P)') ? 'P' : 'B';
-        
-        // 기존 선택 상태 초기화
-        this.optionBtns.forEach(btn => {
+
+        // 모든 척도 버튼 선택 해제
+        this.scaleBtns.forEach(btn => {
             btn.classList.remove('selected');
             btn.setAttribute('aria-checked', 'false');
         });
-        
-        // 이전 답변이 있다면 표시
-        if (this.answers[this.currentQuestion]) {
-            const selectedAnswer = this.answers[this.currentQuestion];
-            const selectedBtn = Array.from(this.optionBtns).find(btn => btn.dataset.answer === selectedAnswer);
+
+        // 이전에 선택한 값이 있으면 표시
+        if (this.answers[this.currentQuestion] !== undefined) {
+            const selectedValue = this.answers[this.currentQuestion];
+            const selectedBtn = Array.from(this.scaleBtns).find(btn => btn.dataset.value === String(selectedValue));
             if (selectedBtn) {
                 selectedBtn.classList.add('selected');
                 selectedBtn.setAttribute('aria-checked', 'true');
@@ -165,9 +151,9 @@ class MBTITest {
         this.updateNavigationButtons();
     }
 
-    selectOption(e) {
+    selectScale(e) {
         // 이전 선택 해제
-        this.optionBtns.forEach(btn => {
+        this.scaleBtns.forEach(btn => {
             btn.classList.remove('selected');
             btn.setAttribute('aria-checked', 'false');
         });
@@ -176,7 +162,10 @@ class MBTITest {
         e.target.classList.add('selected');
         e.target.setAttribute('aria-checked', 'true');
         
-        this.answers[this.currentQuestion] = e.target.dataset.answer;
+        // 척도 값 저장 (1-7)
+        const scaleValue = parseInt(e.target.dataset.value);
+        this.answers[this.currentQuestion] = scaleValue;
+        
         this.updateNavigationButtons();
     }
 
@@ -217,8 +206,26 @@ class MBTITest {
     calculateResult() {
         const scores = { I: 0, E: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
         
-        this.answers.forEach(answer => {
-            scores[answer]++;
+        // 7단계 척도 점수 계산
+        // 1-3: 동의 (해당 차원 강화), 4: 중립, 5-7: 비동의 (반대 차원 강화)
+        this.questions.forEach((question, index) => {
+            const scaleValue = this.answers[index];
+            const dimension = question.dimension; // 'I', 'S', 'T', 'J'
+            
+            if (scaleValue <= 3) {
+                // 동의 - 해당 차원에 점수 추가
+                scores[dimension] += (4 - scaleValue); // 1->3점, 2->2점, 3->1점
+            } else if (scaleValue >= 5) {
+                // 비동의 - 반대 차원에 점수 추가
+                const opposite = {
+                    'I': 'E', 'E': 'I',
+                    'S': 'N', 'N': 'S',
+                    'T': 'F', 'F': 'T',
+                    'J': 'P', 'P': 'J'
+                };
+                scores[opposite[dimension]] += (scaleValue - 4); // 5->1점, 6->2점, 7->3점
+            }
+            // scaleValue === 4 (중립)이면 점수 추가하지 않음
         });
         
         const mbtiType = [

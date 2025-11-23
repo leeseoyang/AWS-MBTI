@@ -3,7 +3,7 @@ import numpy as np
 from typing import Dict, List, Tuple
 
 st.set_page_config(
-    page_title="✨ 건양대학교 MBTI 전공 추천 시스템",
+    page_title="🎓 건양대학교 전과 적성 진단 질문지",
     page_icon="🎓",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -12,234 +12,251 @@ st.set_page_config(
 # 전문적인 CSS 스타일링 적용
 st.markdown("""
 <style>
-    /* 전체 페이지 스타일 */
-    .main .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        max-width: 1200px;
-    }
-    
-    /* 헤더 스타일 */
-    .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 20px;
-        margin-bottom: 2rem;
-        color: white;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-    }
-    
-    .main-header h1 {
-        margin: 0;
-        font-size: 2.5rem;
-        font-weight: 700;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    
-    .main-header p {
-        margin: 0.5rem 0 0 0;
-        font-size: 1.1rem;
-        opacity: 0.9;
-    }
-    
-    /* 질문 카드 스타일 */
-    .question-card {
-        background: white;
-        border-radius: 15px;
-        padding: 2rem;
-        margin: 1rem 0;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        border: 1px solid #e8ecf0;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .question-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-    }
-    
-    .question-number {
-        display: inline-block;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 40px;
-        font-weight: bold;
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-    }
-    
-    .question-text {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #2c3e50;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-    
-    /* 선택 옵션 스타일 */
-    .stSelectbox > div > div {
-        border: 2px solid #e8ecf0;
-        border-radius: 10px;
-        font-size: 1rem;
-        background: #f8f9fa;
-    }
-    
-    .stSelectbox > div > div:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-    
-    /* 결과 카드 스타일 */
-    .result-card {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: white;
-        padding: 2rem;
-        border-radius: 20px;
-        margin: 2rem 0;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
-    }
-    
-    .mbti-result {
-        font-size: 3rem;
-        font-weight: 800;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        margin-bottom: 1rem;
-        letter-spacing: 3px;
-    }
-    
-    .mbti-description {
-        font-size: 1.3rem;
-        opacity: 0.9;
-        line-height: 1.6;
-    }
-    
-    /* 추천 학과 카드 */
-    .recommendation-card {
-        background: white;
-        border-radius: 15px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        border-left: 5px solid #667eea;
-        transition: transform 0.2s ease;
-    }
-    
-    .recommendation-card:hover {
-        transform: translateX(5px);
-    }
-    
-    .recommendation-rank {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 0.9rem;
-        display: inline-block;
-        margin-bottom: 0.8rem;
-    }
-    
-    .recommendation-major {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 0.5rem;
-    }
-    
-    .recommendation-score {
-        color: #7f8c8d;
-        font-size: 1rem;
-        font-weight: 500;
-    }
-    
-    /* 프로그레스 바 */
-    .progress-container {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 1rem 0;
-        text-align: center;
-    }
-    
-    .progress-text {
-        color: #667eea;
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-    
-    /* 버튼 스타일 */
-    .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        padding: 0.8rem 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    }
-    
-    .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
-    
-    /* 추가 정보 스타일 */
-    .info-box {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        border-left: 4px solid #17a2b8;
-    }
-    
-    .info-box h4 {
-        color: #17a2b8;
-        margin-bottom: 0.8rem;
-        font-weight: 600;
-    }
-    
-    /* 애니메이션 */
-    .fade-in {
-        animation: fadeIn 0.8s ease-in-out;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* 반응형 디자인 */
-    @media (max-width: 768px) {
-        .main-header h1 { font-size: 2rem; }
-        .mbti-result { font-size: 2.5rem; }
-        .question-text { font-size: 1.1rem; }
-    }
+body, .main .block-container {
+    font-family: 'Gmarket Sans', 'Pretendard', 'Noto Sans KR', sans-serif !important;
+    background: linear-gradient(135deg, #fbc2eb 0%, #a7f3d0 100%) !important;
+}
+.main-header {
+    background: linear-gradient(135deg, #a7f3d0 0%, #fbc2eb 100%);
+    padding: 2.5rem 2rem 1.5rem 2rem;
+    border-radius: 2.5rem;
+    margin-bottom: 2rem;
+    color: #222;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(167,243,208,0.18);
+    border: 1.5px solid #fbc2eb;
+}
+.main-header h1 {
+    margin: 0;
+    font-size: 2.7rem;
+    font-weight: 900;
+    text-shadow: 0 2px 16px rgba(167,243,208,0.18);
+    letter-spacing: 0.03em;
+}
+.main-header p {
+    margin: 0.5rem 0 0 0;
+    font-size: 1.15rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+.info-box {
+    background: linear-gradient(90deg, #fef9c3 0%, #bae6fd 100%);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(96,165,250,0.10);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    border: 1.5px solid #bae6fd;
+}
+.info-box h4 {
+    color: #38bdf8;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+}
+.question-card {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a7f3d0 100%);
+    border-radius: 2rem;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 8px 25px rgba(96,165,250,0.12);
+    border: 1.5px solid #fbc2eb;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+.question-card:hover {
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 12px 35px rgba(96,165,250,0.18);
+}
+.question-number {
+    display: inline-block;
+    background: linear-gradient(135deg, #38bdf8 60%, #facc15 100%);
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 44px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border: 2.5px solid #fff;
+    box-shadow: 0 2px 8px rgba(96,165,250,0.12);
+}
+.question-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 8px rgba(96,165,250,0.10);
+}
+.stRadio > div {
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 8px rgba(96,165,250,0.08);
+    border: 2px solid #facc15;
+    margin-bottom: 0.7rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+}
+.stRadio > div:hover {
+    background: linear-gradient(90deg, #bae6fd 60%, #fef9c3 100%);
+    color: #38bdf8;
+    border-color: #38bdf8;
+    box-shadow: 0 4px 16px rgba(96,165,250,0.18);
+    transform: scale(1.06);
+}
+.stRadio > div[aria-checked="true"] {
+    background: linear-gradient(90deg, #4ade80 60%, #38bdf8 100%);
+    color: #fff;
+    border-color: #4ade80;
+    box-shadow: 0 0 0 4px rgba(74,222,128,0.15);
+    font-weight: 700;
+}
+.stRadio > div[aria-checked="true"]::before {
+    content: '✅';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+}
+.result-card {
+    background: linear-gradient(135deg, #bae6fd 0%, #fef9c3 100%);
+    color: #222;
+    padding: 2rem;
+    border-radius: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(96,165,250,0.18);
+    border: 1.5px solid #bae6fd;
+}
+.mbti-result {
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(96,165,250,0.10);
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    color: #38bdf8;
+}
+.mbti-description {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+.recommendation-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 6px 20px rgba(96,165,250,0.10);
+    border-left: 5px solid #38bdf8;
+    transition: transform 0.2s;
+}
+.recommendation-card:hover {
+    transform: scale(1.03) translateX(5px);
+}
+.recommendation-rank {
+    background: linear-gradient(135deg, #38bdf8 0%, #facc15 100%);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.recommendation-major {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0.5rem;
+}
+.recommendation-score {
+    color: #7f8c8d;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.progress-container {
+    background: linear-gradient(90deg, #fef9c3 0%, #bae6fd 100%);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(96,165,250,0.10);
+}
+.progress-text {
+    color: #38bdf8;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.progress-text::before {
+    content: '📝';
+    font-size: 1.1rem;
+}
+.stButton > button {
+    background: linear-gradient(135deg, #38bdf8 0%, #facc15 100%);
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(56,189,248,0.18);
+}
+.stButton > button:hover {
+    transform: scale(1.07) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(56,189,248,0.28);
+}
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+    .main-header h1 { font-size: 2rem; }
+    .mbti-result { font-size: 2.2rem; }
+    .question-text { font-size: 1.05rem; }
+    .question-card { padding: 1.2rem; }
+}
 </style>
 """, unsafe_allow_html=True)
 
 # 메인 헤더
 st.markdown("""
 <div class="main-header fade-in">
-    <h1>🎓 건양대학교 MBTI 전공 추천 시스템</h1>
-    <p>AI가 분석하는 나만의 완벽한 전공 찾기 ✨</p>
+    <h1>🎓 건양대학교 전과 적성 진단 질문지</h1>
 </div>
 """, unsafe_allow_html=True)
 
-# 소개 섹션
+# 안내문 섹션
 st.markdown("""
 <div class="info-box fade-in">
-    <h4>🔍 정확한 MBTI 검사를 위한 안내</h4>
-    <p>• 각 질문에 대해 <strong>첫 번째 직감</strong>으로 답변해주세요</p>
-    <p>• 이상적인 모습이 아닌 <strong>현재 실제 모습</strong>을 기준으로 선택해주세요</p>
-    <p>• 32개 질문을 모두 답변하시면 AI가 맞춤형 전공을 추천해드립니다</p>
+    <h4>📌 안내문</h4>
+    <p>본 질문지는 건양대학교 재학생의 전과 준비를 지원하기 위해 제작되었습니다.<br>
+    학생 개개인의 성향 및 학습 스타일을 간단히 파악하여,<br>
+    전과가 가능한 학과 중 학생에게 적합한 전공 방향을 예비적으로 제시하는 것을 목적으로 합니다.</p>
+    
+    <p style="margin-top: 1.5rem;"><strong>아래의 내용을 확인한 후 응답해 주시기 바랍니다.</strong></p>
+    <ol style="margin-left: 1.5rem; line-height: 1.8;">
+        <li>각 문항은 현재 본인의 모습을 기준으로 선택해 주십시오.</li>
+        <li>응답은 가급적 첫 느낌에 가장 가까운 항목으로 선택하는 것을 권장합니다.</li>
+        <li>질문지 결과는 전과 지원의 자격 및 선발 여부와 무관하며,<br>
+        학생의 전공 탐색을 돕기 위한 참고용 자료로 제공됩니다.</li>
+        <li>모든 문항에 응답할 경우, 입력된 답변을 기반으로<br>
+        학생의 성향 분석에 따른 전공 추천 결과가 안내됩니다.</li>
+    </ol>
+    
+    <p style="margin-top: 1.5rem; font-weight: 600; color: #38bdf8;">학생 여러분의 성실한 응답은 향후 전과 준비 및 전공 선택에 유의미한 도움이 될 것입니다.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -300,27 +317,27 @@ responses: Dict[str, List[str]] = {"IE": [], "SN": [], "TF": [], "JP": []}
 
 with st.form("mbti_test"):
     st.subheader("I / E 문항")
-    for q in questions["IE"]:
+    for idx, q in enumerate(questions["IE"]):
         responses["IE"].append(
-            st.radio(q, ["A (I)", "B (E)"], key=q)
+            st.radio(q, ["A (I)", "B (E)"], key=f"IE_{idx}", index=None)
         )
 
     st.subheader("S / N 문항")
-    for q in questions["SN"]:
+    for idx, q in enumerate(questions["SN"]):
         responses["SN"].append(
-            st.radio(q, ["A (S)", "B (N)"], key=q)
+            st.radio(q, ["A (S)", "B (N)"], key=f"SN_{idx}", index=None)
         )
 
     st.subheader("T / F 문항")
-    for q in questions["TF"]:
+    for idx, q in enumerate(questions["TF"]):
         responses["TF"].append(
-            st.radio(q, ["A (T)", "B (F)"], key=q)
+            st.radio(q, ["A (T)", "B (F)"], key=f"TF_{idx}", index=None)
         )
 
     st.subheader("J / P 문항")
-    for q in questions["JP"]:
+    for idx, q in enumerate(questions["JP"]):
         responses["JP"].append(
-            st.radio(q, ["A (J)", "B (P)"], key=q)
+            st.radio(q, ["A (J)", "B (P)"], key=f"JP_{idx}", index=None)
         )
 
     submitted = st.form_submit_button("결과 확인하기")
