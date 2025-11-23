@@ -242,12 +242,15 @@ st.markdown("""
 st.markdown("""
 <div class="info-box fade-in">
     <h4>📌 안내문</h4>
-    <p>본 질문지는 건양대학교 재학생의 전과 준비를 지원하기 위해 제작되었습니다.<br>
+    <p style="line-height: 1.8; margin-bottom: 1rem;">
+    본 질문지는 건양대학교 재학생의 전과 준비를 지원하기 위해 제작되었습니다.<br>
     학생 개개인의 성향 및 학습 스타일을 간단히 파악하여,<br>
-    전과가 가능한 학과 중 학생에게 적합한 전공 방향을 예비적으로 제시하는 것을 목적으로 합니다.</p>
+    전과가 가능한 학과 중 학생에게 적합한 전공 방향을 예비적으로 제시하는 것을 목적으로 합니다.
+    </p>
     
-    <p style="margin-top: 1.5rem;"><strong>아래의 내용을 확인한 후 응답해 주시기 바랍니다.</strong></p>
-    <ol style="margin-left: 1.5rem; line-height: 1.8;">
+    <p style="margin-top: 1.5rem; font-weight: 600;"><strong>아래의 내용을 확인한 후 응답해 주시기 바랍니다.</strong></p>
+    
+    <ol style="margin-left: 1.5rem; line-height: 1.8; margin-bottom: 1.5rem;">
         <li>각 문항은 현재 본인의 모습을 기준으로 선택해 주십시오.</li>
         <li>응답은 가급적 첫 느낌에 가장 가까운 항목으로 선택하는 것을 권장합니다.</li>
         <li>질문지 결과는 전과 지원의 자격 및 선발 여부와 무관하며,<br>
@@ -256,7 +259,9 @@ st.markdown("""
         학생의 성향 분석에 따른 전공 추천 결과가 안내됩니다.</li>
     </ol>
     
-    <p style="margin-top: 1.5rem; font-weight: 600; color: #38bdf8;">학생 여러분의 성실한 응답은 향후 전과 준비 및 전공 선택에 유의미한 도움이 될 것입니다.</p>
+    <p style="margin-top: 1.5rem; font-weight: 700; color: #38bdf8;">
+    학생 여러분의 성실한 응답은 향후 전과 준비 및 전공 선택에 유의미한 도움이 될 것입니다.
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -347,14 +352,14 @@ with st.form("mbti_test"):
 # ------------------------------------------------------------
 
 def calc_mbti(res: Dict[str, List[str]]) -> str:
-    I = sum([1 for r in res["IE"] if "I" in r])
-    E = sum([1 for r in res["IE"] if "E" in r])
-    S = sum([1 for r in res["SN"] if "S" in r])
-    N = sum([1 for r in res["SN"] if "N" in r])
-    T = sum([1 for r in res["TF"] if "T" in r])
-    F = sum([1 for r in res["TF"] if "F" in r])
-    J = sum([1 for r in res["JP"] if "J" in r])
-    P = sum([1 for r in res["JP"] if "P" in r])
+    I = sum([1 for r in res["IE"] if r and "I" in r])
+    E = sum([1 for r in res["IE"] if r and "E" in r])
+    S = sum([1 for r in res["SN"] if r and "S" in r])
+    N = sum([1 for r in res["SN"] if r and "N" in r])
+    T = sum([1 for r in res["TF"] if r and "T" in r])
+    F = sum([1 for r in res["TF"] if r and "F" in r])
+    J = sum([1 for r in res["JP"] if r and "J" in r])
+    P = sum([1 for r in res["JP"] if r and "P" in r])
 
     type_IE = "I" if I > E else "E"
     type_SN = "S" if S > N else "N"
